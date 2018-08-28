@@ -14,5 +14,6 @@ namespace ExemploClientServer.Core.Interfaces.Repo
         void Delete(int id);
         void Delete(T entity);
         IQueryable<T> Filter();
+        void SaveChanges();
     }
 }

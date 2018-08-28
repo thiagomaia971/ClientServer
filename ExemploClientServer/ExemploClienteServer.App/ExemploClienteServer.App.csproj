@@ -19,4 +19,10 @@
     <ProjectReference Include="..\ExemploClientServer.Hub.Client\ExemploClientServer.Hub.Client.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="Pages\Computadores.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+  </ItemGroup>
+
 </Project>

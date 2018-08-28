@@ -1,0 +1,26 @@
+﻿@page "/computadores"
+@inherits ComputadoresPages
+
+<h1>Computadores Registrados!</h1>
+
+<table class="table">
+    <tr>
+        <th>IP</th>
+        <th>Nome</th>
+        <th>Ativo</th>
+    </tr>
+    <tr>
+        @foreach (var comp in computadores)
+        {
+            <td>
+                @comp.Ip
+            </td>
+            <td>
+                @comp.Nome
+            </td>
+            <td>
+                @(!comp.Inativo)
+            </td>
+        }
+    </tr>
+</table>

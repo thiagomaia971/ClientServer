@@ -40,5 +40,8 @@ namespace ExemploClientServer.Infraestrutura.Repo
 
         public virtual IQueryable<T> Filter()
             => _dbSet;
+
+        public void SaveChanges() 
+            => Context.SaveChanges();
     }
 }

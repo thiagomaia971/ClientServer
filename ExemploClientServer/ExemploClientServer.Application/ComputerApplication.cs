@@ -18,8 +18,11 @@ namespace ExemploClientServer.Application
             {
                 computer = new Computer() { Ip = ip, Nome = nomeMaquina };
                 _computeRepository.Add(computer);
+                _computeRepository.SaveChanges();
             }
-            
+            else
+                computer.Inativo = false;
+
             return computer;
         }
     }
