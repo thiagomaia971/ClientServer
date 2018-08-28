@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ExemploClientServer.Core.Entities
+﻿namespace ExemploClientServer.Core.Models
 {
     public class Entity
     {

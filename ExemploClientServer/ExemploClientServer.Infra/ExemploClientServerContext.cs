@@ -1,9 +1,9 @@
-﻿using ExemploClientServer.Core.Entities;
+﻿using ExemploClientServer.Core.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace ExemploClientServer.Infra
 {
-    public partial class ExemploClientServerContext : DbContext
+    public class ExemploClientServerContext : DbContext
     {
         public DbSet<Computer> Computers { get; set; }
 
@@ -20,7 +20,6 @@ namespace ExemploClientServer.Infra
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
                 optionsBuilder.UseSqlServer("Server=.\\SQLEXPRESS;Database=ExemploClientServer;Trusted_Connection=True;");
             }
         }

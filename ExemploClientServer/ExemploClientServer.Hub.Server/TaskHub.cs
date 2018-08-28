@@ -1,18 +1,23 @@
 ﻿using System.Threading.Tasks;
+using ExemploClientServer.Core.Interfaces.ApplicationServices;
 using Microsoft.AspNetCore.SignalR;
 
 namespace ExemploClientServer.Hub.Server
 {
     public class TaskHub : Microsoft.AspNetCore.SignalR.Hub
     {
-        public TaskHub(IRepository<Computer>)
-        {
-            
-        }
-        public async Task SendMessage(string user, string message) 
+        private readonly IComputerApplication _computerApplication;
+
+        public TaskHub(IComputerApplication computerApplication)
+            => _computerApplication = computerApplication;
+
+        public async void SendMessage(string user, string message) 
             => await Clients.All.SendAsync("ReceiveMessage", user, message);
 
-        public async Task SendMessage(string user, string message)
-            => await Clients.All.SendAsync("ReceiveMessage", user, message);
+        public async Task RegistrarComputador(string nomeMaquina, string ip)
+        {
+            var computer = _computerApplication.RegistrarComputador(nomeMaquina, ip);
+            await Clients.All.SendAsync("ComputadorRegistrado", computer);
+        }
     }
 }

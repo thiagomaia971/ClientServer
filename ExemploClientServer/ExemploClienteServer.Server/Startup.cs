@@ -1,11 +1,17 @@
+using System.Linq;
+using System.Net.Mime;
+using ExemploClientServer.Application;
+using ExemploClientServer.Core.Interfaces.ApplicationServices;
+using ExemploClientServer.Core.Interfaces.Repo;
+using ExemploClientServer.Hub.Server;
+using ExemploClientServer.Infra;
+using ExemploClientServer.Infra.Repo;
 using Microsoft.AspNetCore.Blazor.Server;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.ResponseCompression;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using System.Linq;
-using System.Net.Mime;
-using ExemploClientServer.Hub.Server;
 
 namespace ExemploClienteServer.Server
 {
@@ -26,6 +32,11 @@ namespace ExemploClienteServer.Server
                     WasmMediaTypeNames.Application.Wasm,
                 });
             });
+
+            services.AddScoped<DbContext, ExemploClientServerContext>();
+            services.AddScoped<IComputerRepository, ComputerRepository>();
+            services.AddScoped<IComputerApplication, ComputerApplication>();
+
             services.AddSignalR();
         }
 

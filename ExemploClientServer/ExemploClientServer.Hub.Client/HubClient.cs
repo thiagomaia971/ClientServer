@@ -13,7 +13,7 @@ namespace ExemploClientServer.Hub.Client
         public HubClient(string url)
         {
             Connection = new HubConnectionBuilder().WithUrl($"{BaseUrl}/{url}").Build();
-            Connection.StartAsync();
+            Connection.StartAsync().GetAwaiter();
         }
     }
 }

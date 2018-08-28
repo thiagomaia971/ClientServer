@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Linq;
-using ExemploClientServer.Core.Entities;
+using ExemploClientServer.Core.Models;
 
-namespace ExemploClientServer.Core.Interfaces.Repositories
+namespace ExemploClientServer.Core.Interfaces.Repo
 {
     public interface IRepository<T> where T : Entity
     {

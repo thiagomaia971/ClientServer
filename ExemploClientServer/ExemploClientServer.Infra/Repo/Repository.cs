@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Linq;
-using ExemploClientServer.Core.Entities;
-using ExemploClientServer.Core.Interfaces.Repositories;
+using ExemploClientServer.Core.Interfaces.Repo;
+using ExemploClientServer.Core.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace ExemploClientServer.Infra.Repositories
+namespace ExemploClientServer.Infra.Repo
 {
     public class Repository<T> : IRepository<T> where T: Entity
     {

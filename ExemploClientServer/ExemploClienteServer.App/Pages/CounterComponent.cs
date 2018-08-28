@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using ExemploClientServer.Core.Interfaces.ApplicationServices;
 using ExemploClientServer.Hub.Client;
 using Microsoft.AspNetCore.Blazor.Components;
 
@@ -10,6 +11,8 @@ namespace ExemploClienteServer.App.Pages
         protected int currentCount = 0;
         protected ICollection<string> itens;
         protected TaskHubClient taskHubClient;
+        [Inject]
+        protected IComputerApplication ComputerApplication { get; set; }
 
         protected  void IncrementCount()
         {

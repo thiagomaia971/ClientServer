@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Net;
+using System.Threading.Tasks;
 using ExemploClientServer.Hub.Client;
 
 namespace ExemploClientServer.Client
@@ -9,11 +10,11 @@ namespace ExemploClientServer.Client
     {
         public static TaskHubClient TaskHubClient { get; set; }
 
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
             TaskHubClient = new TaskHubClient();
 
-            TaskHubClient.RegistrarMaquina(Environment.MachineName, Dns.GetHostAddresses(Environment.MachineName)[0].ToString());
+            await TaskHubClient.RegistrarComputador(Environment.MachineName, Dns.GetHostAddresses(Environment.MachineName)[0].ToString());
             var process = Process.GetProcesses();
             //Process.
             Console.ReadLine();
