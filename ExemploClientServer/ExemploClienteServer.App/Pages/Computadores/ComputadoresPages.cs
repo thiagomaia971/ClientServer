@@ -1,13 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using ExemploClientServer.Core.Interfaces.ApplicationServices;
 using ExemploClientServer.Core.Interfaces.Repo;
 using ExemploClientServer.Core.Models;
 using ExemploClientServer.Hub.Client;
 using Microsoft.AspNetCore.Blazor.Components;
 
-namespace ExemploClienteServer.App.Pages
+namespace ExemploClienteServer.App.Pages.Computadores
 {
     public class ComputadoresPages : BlazorComponent
     {
@@ -19,7 +18,7 @@ namespace ExemploClienteServer.App.Pages
         protected override Task OnInitAsync()
         {
             taskHubClient = new TaskHubClient();
-            computadores = ComputerRepository.GetAll().ToArray();
+            computadores = ComputerRepository.GetAll().ToList();
 
             taskHubClient.ComputadorAlterado(ComputadorAlteradoHandler);
             return base.OnInitAsync();

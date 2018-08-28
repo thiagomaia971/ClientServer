@@ -18,7 +18,7 @@ namespace ExemploClientServer.Hub.Client
         public async void SendMessage(string user, string message) 
             => await Connection.InvokeAsync("SendMessage", user, message);
 
-        public async Task RegistrarComputador(string nomeMaquina, string ip)
+        public async Task RegistrarComputador(string nomeMaquina, string ip) 
             => await Connection.InvokeAsync("RegistrarComputador", nomeMaquina, ip);
 
         public void ComputadorAlterado(Action<Computer> handler)

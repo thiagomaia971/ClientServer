@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.AspNetCore.SignalR.Client;
+﻿using Microsoft.AspNetCore.SignalR.Client;
 
 namespace ExemploClientServer.Hub.Client
 {
     public class HubClient
     {
         protected HubConnection Connection { get; set; }
-        protected string BaseUrl { get; set; } = "http://localhost:50096";
+        protected string BaseUrl { get; set; } = "http://localhost:51885";
 
         public HubClient(string url)
         {
