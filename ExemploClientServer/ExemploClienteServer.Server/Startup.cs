@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.Extensions.DependencyInjection;
 using System.Linq;
 using System.Net.Mime;
-using ExemploClienteServer.Server.Hubs;
+using ExemploClientServer.Hub.Server;
 
 namespace ExemploClienteServer.Server
 {

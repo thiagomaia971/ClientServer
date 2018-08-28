@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ExemploClientServer.Core\ExemploClientServer.Core.csproj" />
+    <ProjectReference Include="..\ExemploClientServer.Hub.Client\ExemploClientServer.Hub.Client.csproj" />
   </ItemGroup>
 
 </Project>
