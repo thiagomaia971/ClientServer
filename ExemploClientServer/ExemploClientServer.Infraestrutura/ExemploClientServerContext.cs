@@ -6,6 +6,7 @@ namespace ExemploClientServer.Infraestrutura
     public class ExemploClientServerContext : DbContext
     {
         public DbSet<Computer> Computers { get; set; }
+        public DbSet<Process> Process { get; set; }
 
         public ExemploClientServerContext()
         {
@@ -21,6 +22,7 @@ namespace ExemploClientServer.Infraestrutura
             if (!optionsBuilder.IsConfigured)
             {
                 optionsBuilder.UseSqlServer("Server=.\\SQLEXPRESS;Database=ExemploClientServer;Trusted_Connection=True;");
+                //optionsBuilder.UseLazyLoadingProxies();
             }
         }
 

@@ -17,31 +17,31 @@ namespace ExemploClientServer.Infraestrutura.Repo
             _dbSet = Context.Set<T>();
         }
 
-        public void Add(T entity)
+        public virtual void Add(T entity)
             => _dbSet.Add(entity);
 
-        public void Delete(int id)
+        public virtual void Delete(int id)
             => Delete(GetSingle(id));
 
-        public void Delete(T entity)
+        public virtual void Delete(T entity)
             => _dbSet.Remove(entity);
 
-        public IQueryable<T> GetAll()
+        public virtual IQueryable<T> GetAll()
             => Filter();
 
-        public IQueryable<T> GetAll(Func<T, bool> predicate)
+        public virtual IQueryable<T> GetAll(Func<T, bool> predicate)
             => Filter().AsEnumerable().Where(predicate).AsQueryable();
 
-        public T GetSingle(int id)
+        public virtual T GetSingle(int id)
             => Filter().SingleOrDefault(x => x.Id == id);
 
-        public void Update(T entity)
+        public virtual void Update(T entity)
             => _dbSet.Update(entity);
 
         public virtual IQueryable<T> Filter()
             => _dbSet;
 
-        public void SaveChanges() 
+        public virtual void SaveChanges() 
             => Context.SaveChanges();
     }
 }

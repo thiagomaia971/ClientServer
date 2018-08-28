@@ -7,7 +7,8 @@
     <tr>
         <th>IP</th>
         <th>Nome</th>
-        <th>Ativo</th>
+        <th>Número de Processos</th>
+        <th>Inativo</th>
     </tr>
     <tr>
         @foreach (var comp in computadores)
@@ -19,7 +20,10 @@
                 @comp.Nome
             </td>
             <td>
-                @(!comp.Inativo)
+                @comp.Process?.Count
+            </td>
+            <td>
+                <input type="checkbox" bind=@(comp.Inativo)/>
             </td>
         }
     </tr>

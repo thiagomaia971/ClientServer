@@ -1,6 +1,10 @@
-﻿using ExemploClientServer.Core.Interfaces.ApplicationServices;
+﻿using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using ExemploClientServer.Core.Interfaces.ApplicationServices;
 using ExemploClientServer.Core.Interfaces.Repo;
 using ExemploClientServer.Core.Models;
+using Process = ExemploClientServer.Core.Models.Process;
 
 namespace ExemploClientServer.Application
 {
@@ -31,6 +35,21 @@ namespace ExemploClientServer.Application
 
         public Computer DesativarMaquina(string nomeMaquina, string ip)
             => ToggleMaquina(nomeMaquina, ip, true);
+
+        public Computer InformarProcessos(string nomeMaquina, string ip, IEnumerable<Process> processos)
+        {
+            var computer = _computeRepository.GetByNameAndIp(nomeMaquina, ip);
+
+            computer.Process = new List<Process>();
+            _computeRepository.Update(computer);
+            _computeRepository.SaveChanges();
+
+            computer.Process = processos.ToList();
+            _computeRepository.Update(computer);
+            _computeRepository.SaveChanges();
+
+            return computer;
+        }
 
 
         private Computer ToggleMaquina(string nomeMaquina, string ip, bool inativo)

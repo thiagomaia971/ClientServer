@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using ExemploClientServer.Core.Models;
 using Microsoft.AspNetCore.SignalR.Client;
+using Process = ExemploClientServer.Core.Models.Process;
 
 namespace ExemploClientServer.Hub.Client
 {
@@ -12,17 +13,11 @@ namespace ExemploClientServer.Hub.Client
         {
         }
 
-        public void ReceiveMessage(Action<string, string> handler)
-            => Connection.On("ReceiveMessage", handler);
-
-        public async void SendMessage(string user, string message) 
-            => await Connection.InvokeAsync("SendMessage", user, message);
+        public void ComputadorAlterado(Action<Computer> handler)
+            => Connection.On("ComputadorAlterado", handler);
 
         public async Task RegistrarComputador(string nomeMaquina, string ip) 
             => await Connection.InvokeAsync("RegistrarComputador", nomeMaquina, ip);
-
-        public void ComputadorAlterado(Action<Computer> handler)
-            => Connection.On("ComputadorAlterado", handler);
 
         public async Task AtivarMaquina(string machineName, string ip)
             => await Connection.InvokeAsync("AtivarMaquina", machineName, ip);
@@ -30,5 +25,7 @@ namespace ExemploClientServer.Hub.Client
         public async Task DesativarMaquina(string machineName, string ip)
             => await Connection.InvokeAsync("DesativarMaquina", machineName, ip);
 
+        public async Task InformarProcessos(string machineName, string ip, Process[] processos)
+            => await Connection.InvokeAsync("InformarProcessos", machineName, ip, processos);
     }
 }

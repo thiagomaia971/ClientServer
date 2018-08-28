@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Linq;
 using System.Net;
-using System.Threading;
 using System.Threading.Tasks;
 using ExemploClientServer.Hub.Client;
+using ProcessModel = ExemploClientServer.Core.Models.Process;
 
 namespace ExemploClientServer.Client
 {
@@ -42,11 +43,8 @@ namespace ExemploClientServer.Client
                     else if (value == "2")
                         await TaskHubClient.DesativarMaquina(MachineName, Ip);
 
+                    await TaskHubClient.InformarProcessos(MachineName, Ip, Process.GetProcesses().Select(ProcessMap).ToArray());
                 } while (true);
-
-                var process = Process.GetProcesses();
-                //Process.
-                Console.ReadLine();
             }
             catch (Exception e)
             {
@@ -54,5 +52,12 @@ namespace ExemploClientServer.Client
                 throw;
             }
         }
+
+        private static ProcessModel ProcessMap(Process process)
+            => new ProcessModel
+            {
+                ProcessId = process.Id,
+                Nome = process.ProcessName
+            };
     }
 }
