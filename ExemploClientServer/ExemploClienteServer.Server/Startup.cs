@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.Extensions.DependencyInjection;
 using System.Linq;
 using System.Net.Mime;
+using ExemploClienteServer.Server.Hubs;
 
 namespace ExemploClienteServer.Server
 {
@@ -25,6 +26,7 @@ namespace ExemploClienteServer.Server
                     WasmMediaTypeNames.Application.Wasm,
                 });
             });
+            services.AddSignalR();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -36,6 +38,11 @@ namespace ExemploClienteServer.Server
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseSignalR(routes =>
+            {
+                routes.MapHub<TaskHub>("/taskHub");
+            });
 
             // Use component registrations and static files from the app project.
             app.UseServerSideBlazor<App.Startup>();
