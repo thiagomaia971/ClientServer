@@ -17,7 +17,19 @@ namespace ExemploClientServer.Hub.Server
         public async Task RegistrarComputador(string nomeMaquina, string ip)
         {
             var computer = _computerApplication.RegistrarComputador(nomeMaquina, ip);
-            await Clients.All.SendAsync("ComputadorRegistrado", computer);
+            await Clients.All.SendAsync("ComputadorAlterado", computer);
+        }
+
+        public async Task AtivarMaquina(string nomeMaquina, string ip)
+        {
+            var computer = _computerApplication.AtivarMaquina(nomeMaquina, ip);
+            await Clients.All.SendAsync("ComputadorAlterado", computer);
+        }
+
+        public async Task DesativarMaquina(string nomeMaquina, string ip)
+        {
+            var computer = _computerApplication.DesativarMaquina(nomeMaquina, ip);
+            await Clients.All.SendAsync("ComputadorAlterado", computer);
         }
     }
 }

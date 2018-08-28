@@ -13,7 +13,7 @@ namespace ExemploClienteServer.App.Pages
     {
         [Inject]
         protected IComputerRepository ComputerRepository { get; set; }
-        protected Computer[] computadores;
+        protected ICollection<Computer> computadores;
         protected TaskHubClient taskHubClient;
 
         protected override Task OnInitAsync()
@@ -21,11 +21,18 @@ namespace ExemploClienteServer.App.Pages
             taskHubClient = new TaskHubClient();
             computadores = ComputerRepository.GetAll().ToArray();
 
-            taskHubClient.ComputadorRegistrado(ComputadorRegistradoHandler);
+            taskHubClient.ComputadorAlterado(ComputadorAlteradoHandler);
             return base.OnInitAsync();
         }
 
-        protected void ComputadorRegistradoHandler(Computer computer) 
-            => computadores.Single(x => x.Id == computer.Id).Inativo = computer.Inativo;
+        protected void ComputadorAlteradoHandler(Computer computer)
+        {
+            if (computadores.All(x => x.Id != computer.Id))
+                computadores.Add(computer);
+            computadores
+                .Single(x => x.Id == computer.Id)
+                .Inativo = computer.Inativo;
+            StateHasChanged();
+        }
     }
 }

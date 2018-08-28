@@ -25,5 +25,22 @@ namespace ExemploClientServer.Application
 
             return computer;
         }
+
+        public Computer AtivarMaquina(string nomeMaquina, string ip) 
+            => ToggleMaquina(nomeMaquina, ip, false);
+
+        public Computer DesativarMaquina(string nomeMaquina, string ip)
+            => ToggleMaquina(nomeMaquina, ip, true);
+
+
+        private Computer ToggleMaquina(string nomeMaquina, string ip, bool inativo)
+        {
+            var computer = _computeRepository.GetByNameAndIp(nomeMaquina, ip);
+            computer.Inativo = inativo;
+            _computeRepository.Update(computer);
+            _computeRepository.SaveChanges();
+
+            return computer;
+        }
     }
 }
