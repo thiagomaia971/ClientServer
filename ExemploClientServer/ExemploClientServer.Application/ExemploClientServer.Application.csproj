@@ -6,7 +6,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ExemploClientServer.Core\ExemploClientServer.Core.csproj" />
-    <ProjectReference Include="..\ExemploClientServer.Infra\ExemploClientServer.Infra.csproj" />
   </ItemGroup>
 
 </Project>

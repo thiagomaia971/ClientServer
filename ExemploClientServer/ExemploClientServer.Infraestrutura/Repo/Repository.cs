@@ -4,7 +4,7 @@ using ExemploClientServer.Core.Interfaces.Repo;
 using ExemploClientServer.Core.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace ExemploClientServer.Infra.Repo
+namespace ExemploClientServer.Infraestrutura.Repo
 {
     public class Repository<T> : IRepository<T> where T: Entity
     {

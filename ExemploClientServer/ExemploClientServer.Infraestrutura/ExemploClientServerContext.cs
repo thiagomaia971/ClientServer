@@ -1,7 +1,7 @@
 ﻿using ExemploClientServer.Core.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace ExemploClientServer.Infra
+namespace ExemploClientServer.Infraestrutura
 {
     public class ExemploClientServerContext : DbContext
     {

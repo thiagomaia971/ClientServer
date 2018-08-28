@@ -1,8 +1,12 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="EntityTypeConfigurations\" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.1.2" />
@@ -14,10 +18,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ExemploClientServer.Core\ExemploClientServer.Core.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="EntityTypeConfigurations\" />
   </ItemGroup>
 
 </Project>
