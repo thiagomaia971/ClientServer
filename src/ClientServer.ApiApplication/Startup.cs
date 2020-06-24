@@ -1,20 +1,18 @@
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Threading.Tasks;
+using ClientServer.ApiApplication.Hubs;
 using ClientServer.Domain.Commands;
 using ClientServer.Infra;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
 namespace ClientServer.ApiApplication
@@ -30,6 +28,8 @@ namespace ClientServer.ApiApplication
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSignalR();
+
             services.AddDbContext<ClientServerDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             
@@ -37,8 +37,14 @@ namespace ClientServer.ApiApplication
                 .AddNewtonsoftJson(opt =>
                 {
                     opt.SerializerSettings.ContractResolver = new DefaultContractResolver();
-                    opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+                    opt.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
                 });
+            
+            services.AddResponseCompression(opts =>
+            {
+                opts.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(
+                    new[] { "application/octet-stream" });
+            });
             
             services.AddMediatR(typeof(SampleCommand).GetTypeInfo().Assembly);
             
@@ -55,6 +61,7 @@ namespace ClientServer.ApiApplication
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseResponseCompression();
             app.UseSwagger();
             
             if (env.IsDevelopment())
@@ -74,6 +81,7 @@ namespace ClientServer.ApiApplication
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHub<ChatHub>("/chathub");
             });
         }
     }
